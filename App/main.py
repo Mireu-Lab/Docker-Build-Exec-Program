@@ -18,6 +18,7 @@ def check_docker_exec(file : UploadFile = File(...)):
     with open(file_location, "wb+") as file_object:
         shutil.copyfileobj(file.file, file_object)
 
+
     if lang == "text/x-python":
         return_data = python.build(file.filename)
     elif lang == "application/x-javascript":
@@ -28,6 +29,7 @@ def check_docker_exec(file : UploadFile = File(...)):
         return_data = cpp.build(file.filename)
     else:
         return {"message" : "unsupported service file"}
+
 
     if os.path.isfile(file_location):
         os.remove(file_location)
