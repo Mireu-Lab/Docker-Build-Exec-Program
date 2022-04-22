@@ -1,26 +1,44 @@
 # Docker Build Exec Program
 
-## 실행방법
+This program sends the file containing the program to the API and processes it instead.
 
-이 프로그램은 아래와 같은 순서대로 작동을 시켜주세요
+The API simply acts as `multipart/form-data` and further informs you that the service is updated.
+
+ 
+
+## Program Settings
+
+Please run the program in the following order
+
 ```shell
-# 기본 설치 프로그램 세팅
+# Default Setup Settings
 sudo sh Install/install.sh
 
-# API 코드 실행
+# Background Run Settings
+sudo sh Install/set.sh
+```
+
+or
+
+```shell
+# Default Setup Settings
+sudo sh Install/install.sh
+
+# Run API General
 sudo python3 App/main.py 
 ```
 
-해당 프로그램들은 관리자 권한이 반드시 필요하며 
-실행전 sudo 을 안빠져있는지 확인후 세팅 해주세요.
+Make sure to run the API in the parent folder where README is located
 
-## 사용법
+To match, the default program installation requires administrator privileges, as well as background, API execution, all require administrator privileges.
 
-- CURL 파이썬 요청
 
-```
+
+- Example) CURL Python Request
+
+```shell
 curl -X 'POST' \
-  'http://testing.mireu.xyz/check' \
+  'http://fig-tree.mireu.xyz/check' \
   -H 'accept: application/json' \
   -H 'Content-Type: multipart/form-data' \
   -F 'file=@main.py;type=application/x-python'
@@ -28,28 +46,50 @@ curl -X 'POST' \
 
 
 
-- CURL 자바스크립트 요청
+- Example) Execution results
 
+```json
+{
+    // Language executed
+	"test build language" : "python",  
+	
+    // Container build time
+    "container build time" : 0.7950694561004639,
+	
+    // Program Run Time
+    "file execution time" : 0.02586960792541504,
+	
+    // Program Operation Results
+    "file result" : "this_is_a_sample_file\n"
+}
 ```
-curl -X 'POST' \
-  'http://testing.mireu.xyz/check' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: multipart/form-data' \
-  -F 'file=@main.js;type=application/x-javascript'
+
+
+
+- Unsupported file types
+
+```json
+{
+	// File type transferred
+	"test build language" : "text/x-rust",
+    
+    // Result message
+	"message" : "unsupported service file"
+}
 ```
 
 
 
-## 도커 컨테이너 이미지
+### Supported Docker Container Images
 
-| 언어       | 도커 허브 URL                    | 구현 형태 (T/F) |      |
-| ---------- | -------------------------------- | --------------- | ---- |
-| Python     | https://hub.docker.com/_/python  | True            |      |
-| Javascript | https://hub.docker.com/_/node    | True            |      |
-| Golang     | https://hub.docker.com/_/golang  | True            |      |
-| Ruby       | https://hub.docker.com/_/ruby    | False           |      |
-| Java       | https://hub.docker.com/_/openjdk | False           |      |
-| Php        | https://hub.docker.com/_/php     | False           |      |
-| Gcc        | https://hub.docker.com/_/gcc     | True            |      |
-| Rust       | https://hub.docker.com/_/rust    | False           |      |
-| R          | https://hub.docker.com/_/r-base  | False           |      |
+| Language   | Docker Hub URL                   | Implementation Form (T/F) |
+| ---------- | -------------------------------- | ------------------------- |
+| Python     | https://hub.docker.com/_/python  | True                      |
+| Javascript | https://hub.docker.com/_/node    | True                      |
+| Golang     | https://hub.docker.com/_/golang  | True                      |
+| Ruby       | https://hub.docker.com/_/ruby    | False                     |
+| Java       | https://hub.docker.com/_/openjdk | False                     |
+| Php        | https://hub.docker.com/_/php     | False                     |
+| Gcc        | https://hub.docker.com/_/gcc     | True                      |
+| Rust       | https://hub.docker.com/_/rust    | False                     |
+| R          | https://hub.docker.com/_/r-base  | False                     |
