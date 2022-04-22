@@ -1,0 +1,11 @@
+[Unit]
+Description=Docker-Build-Exec-Program-API
+
+[Service]
+User=root
+WorkingDirectory=/home/mireu/Project/Docker-Build-Exec-Program
+ExecStart=python3 App/main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

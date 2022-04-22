@@ -8,7 +8,7 @@ app = FastAPI()
 
 @app.get("/")
 def main():
-    return {}
+    return {"Docs" : "http://exec.mireu.xyz/"}
 
 @app.post("/check")
 def check_docker_exec(file : UploadFile = File(...)):
@@ -19,16 +19,16 @@ def check_docker_exec(file : UploadFile = File(...)):
         shutil.copyfileobj(file.file, file_object)
 
 
-    if lang == "text/x-python":
+    if lang == "text/x-python" or lang == "application/x-python":
         return_data = python.build(file.filename)
-    elif lang == "application/x-javascript":
+    elif lang == "application/x-javascript" or lang == "application/x-javascript":
         return_data = nodejs.build(file.filename)
-    elif lang == "text/x-go":
+    elif lang == "text/x-go" or lang == "application/x-go":
         return_data = golang.build(file.filename)
-    elif lang == "text/x-c++src":
+    elif lang == "text/x-c++src" or lang == "application/x-c++src":
         return_data = cpp.build(file.filename)
     else:
-        return {"message" : "unsupported service file"}
+        return {"test build language" : lang, "message" : "unsupported service file"}
 
 
     if os.path.isfile(file_location):
