@@ -28,7 +28,7 @@ def check_docker_exec(file : UploadFile = File(...)):
     elif lang == "text/x-c++src" or lang == "application/x-c++src":
         return_data = cpp.build(file.filename)
     else:
-        return {"test build language" : lang, "message" : "unsupported service file"}
+        return_data = {"test build language" : lang, "message" : "unsupported service file"}
 
 
     if os.path.isfile(file_location):
