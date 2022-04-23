@@ -31,4 +31,4 @@ def build(filename):
     
     data.remove() # 컨테이너 삭제
     
-    return {"test build language" : "python", "container build time" : build_end - build_start, "file execution time" : run_end - run_start, "file result" : return_data}
+    return {"test build language" : "python", "container build time" : round(build_end - build_start, 3), "file execution time" : round(run_end - run_start, 3), "file result" : return_data}
