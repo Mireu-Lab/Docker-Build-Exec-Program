@@ -12,8 +12,10 @@ def build(filename):
     
     # 컨테이너 종류 / 컨테이너 실행
     docker_contalner = str(client.containers.create(data['python']).id) 
+    
+    sleep(1) # 1초 딜레이
 
-    os.system(f"docker cp Data/user_file/{filename} {docker_contalner}:home/run.cpp") # 컨테이너에 파일 전송
+    os.system(f"docker cp Data/user_file/{filename} {docker_contalner}:home/run.py") # 컨테이너에 파일 전송
     build_end = time() # 컨테이너 빌드 종료 시간
 
     data = client.containers.get(docker_contalner)

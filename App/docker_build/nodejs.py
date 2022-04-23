@@ -11,7 +11,7 @@ def build(filename):
     build_start = time() # 컨테이너 빌드 시간
     docker_contalner = str(client.containers.create(data['javascript']).id) # 컨테이너 종류 / 컨테이너 실행
 
-    os.system(f"docker cp Data/user_file/{filename} {docker_contalner}:home/run.cpp") # 컨테이너에 파일 전송
+    os.system(f"docker cp Data/user_file/{filename} {docker_contalner}:home/run.js") # 컨테이너에 파일 전송
     build_end = time() # 컨테이너 빌드 종료 시간
 
     data = client.containers.get(docker_contalner)
