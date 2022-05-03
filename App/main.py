@@ -13,7 +13,7 @@ app = FastAPI()
 
 @app.get("/")
 def main():
-    return {"Docs" : "http://exec.mireu.xyz/"}
+    return {"Docs" : "http://execpro.mireu.xyz/"}
 
 @app.post("/check")
 def check_docker_exec(file : UploadFile = File(...)):
